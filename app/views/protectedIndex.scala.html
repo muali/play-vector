@@ -1,0 +1,18 @@
+@()
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>play-vector</title>
+    </head>
+        <body>
+        <div id="Toolbar">
+            <button id="LineTool">Line</button>
+        </div>
+        <div id="FileList"></div>
+        <div id="Document">
+            <canvas id="DrawingPanel"></canvas>
+        </div>
+        @playscalajs.html.scripts("client")
+    </body>
+</html>

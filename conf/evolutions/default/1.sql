@@ -1,0 +1,18 @@
+# --- !Ups
+
+create table "USER" (
+  "ID" BIGINT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+  "GITHUB_ID" VARCHAR(255) NOT NULL
+  );
+
+create table "FILE" (
+  "ID" BIGINT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+  "NAME" VARCHAR(255) NOT NULL,
+  "OWNER" BIGINT NOT NULL,
+  "CONTENT" TEXT NOT NULL
+  );
+
+# --- !Downs
+
+drop table "USER";
+drop table "FILE";
