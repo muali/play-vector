@@ -16,3 +16,7 @@ GET     /login/github               controllers.Application.gitHubLogin
 
 # Application
 GET     /app                        controllers.Application.app
+
+# Files
+GET     /file/create/:name          controllers.Files.createFile(name: String)
+GET     /files                      controllers.Files.files

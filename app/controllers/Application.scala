@@ -1,11 +1,14 @@
 package controllers
 
+import javax.inject.Inject
+
+import dao.UsersDAO
 import org.pac4j.core.profile.CommonProfile
 import org.pac4j.play.scala.Security
 import play.api._
 import play.api.mvc._
 
-class Application extends Controller with Security[CommonProfile] {
+class Application @Inject() (usersDAO: UsersDAO) extends Controller with Security[CommonProfile] {
 
   def index = Action {
     Ok(views.html.index())

@@ -4,14 +4,29 @@
     <head>
         <meta charset="UTF-8">
         <title>play-vector</title>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("lib/bootstrap/css/bootstrap.min.css")">
+        <script src="@routes.Assets.versioned("lib/bootstrap/js/bootstrap.min.js")" type="text/javascript"></script>
     </head>
-        <body>
-        <div id="Toolbar">
-            <button id="LineTool">Line</button>
-        </div>
-        <div id="FileList"></div>
-        <div id="Document">
-            <canvas id="DrawingPanel"></canvas>
+    <body>
+        <div>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-10">
+                    <div id="Toolbar">
+                        <button id="LineTool">Line</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <div id="FileList"></div>
+                </div>
+                <div class="col-md-9" style="height: 100%">
+                    <div id="Document" style="height: 100%">
+                        <canvas id="DrawingPanel" data-holder-rendered="true" style="height: 100%; width: 100%; box-shadow: 0 0 2px black;"></canvas>
+                    </div>
+                </div>
+            </div>
         </div>
         @playscalajs.html.scripts("client")
     </body>

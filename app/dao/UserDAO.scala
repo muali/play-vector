@@ -2,6 +2,7 @@ package dao
 
 import javax.inject.{Inject, Singleton}
 
+import models.User
 import play.api.db.slick.{DatabaseConfigProvider, HasDatabaseConfigProvider}
 import slick.driver.JdbcProfile
 
@@ -11,7 +12,6 @@ import scala.concurrent.ExecutionContext.Implicits.global
 /**
  * Created by Moskvitin Maxim.
  */
-case class User(id: Option[Long], facebookId: String, rating: Int = 1200)
 
 
 trait UsersComponent { self: HasDatabaseConfigProvider[JdbcProfile] =>
@@ -19,9 +19,8 @@ trait UsersComponent { self: HasDatabaseConfigProvider[JdbcProfile] =>
 
   class Users(tag: Tag) extends Table[User](tag, "USER") {
     def id = column[Long]("ID", O.PrimaryKey, O.AutoInc)
-    def facebookId = column[String]("FACEBOOK_ID")
-    def rating = column[Int]("RATING")
-    def * = (id.?, facebookId, rating) <> (User.tupled, User.unapply)
+    def gitHubId = column[String]("GITHUB_ID")
+    def * = (id.?, gitHubId) <> (User.tupled, User.unapply)
   }
 }
 
@@ -36,22 +35,18 @@ with HasDatabaseConfigProvider[JdbcProfile] {
   def insert(user: User): Future[Unit] =
     db.run(users += user).map(_ => ())
 
-  def userByFacbookId(facebookId: String): Future[Option[User]] = {
-    db.run(users.filter(_.facebookId === facebookId).result.headOption)
+  def userByGitHubId(gitHubId: String): Future[Option[User]] = {
+    db.run(users.filter(_.gitHubId === gitHubId).result.headOption)
   }
 
-  def getOrCreate(facebookId: String): Future[User] = {
-    userByFacbookId(facebookId).flatMap {
+  def getOrCreate(gitHubId: String): Future[User] = {
+    userByGitHubId(gitHubId).flatMap {
       case Some(user) => Future(user)
       case None =>
-        val user = User(None, facebookId)
+        val user = User(None, gitHubId)
         db.run(users += user).flatMap { r =>
-          userByFacbookId(facebookId).map(_.get)
+          userByGitHubId(gitHubId).map(_.get)
         }
     }
-  }
-
-  def updateRating(id: Long, rating: Int): Future[Unit] = {
-    db.run(users.filter(_.id === id).map(_.rating).update(rating)).map(_ => ())
   }
 }

@@ -16,8 +16,10 @@ object Client extends JSApp{
   val toolbar = new Toolbar(dom.document.getElementById("Toolbar").asInstanceOf[dom.html.Div])
   var filePrimitiveModel = new PrimitiveModel(Map())
   var tempPrimitiveModel = new PrimitiveModel(Map())
+  val fileCtrl = new FileCtrl(dom.document.getElementById("FileList").asInstanceOf[dom.html.Div])
 
   @JSExport
   def main(): Unit = {
+    fileCtrl.updateFileList()
   }
 }

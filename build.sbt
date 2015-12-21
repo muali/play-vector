@@ -20,6 +20,7 @@ lazy val server = (project in file("")).settings(
     "com.typesafe.play" %% "play-slick" % "1.1.1",
     "com.typesafe.play" %% "play-slick-evolutions" % "1.1.1",
     "com.h2database" % "h2" % "1.4.187",
+    "com.adrianhurt" %% "play-bootstrap" % "1.0-P24-B3-SNAPSHOT",
     cache,
     ws,
     specs2 % Test

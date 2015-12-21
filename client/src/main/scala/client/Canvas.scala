@@ -11,6 +11,9 @@ import scala.scalajs.js.annotation.JSExport
 @JSExport
 class Canvas(val element : dom.html.Canvas) {
   val ctx = element.getContext("2d").asInstanceOf[dom.CanvasRenderingContext2D]
+  val bounds = element.getBoundingClientRect()
+  element.width = (bounds.right - bounds.left).toInt
+  element.height = (bounds.bottom - bounds.top).toInt
 
   def toFileCoordinates(pageCoordinates: (Double, Double)) = {
     val (pageX, pageY) = pageCoordinates
